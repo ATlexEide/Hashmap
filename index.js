@@ -7,7 +7,7 @@ class HashMap{
         const primeNumber = 31;
         for(let i = 0; i < key.length ; i++){
             console.log(i)
-            hashCode += (primeNumber * key.charCodeAt(i)) % this.size
+                hashCode += (primeNumber * key.charCodeAt(i)) % this.size
         }
         return hashCode;
     }
