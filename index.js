@@ -59,7 +59,13 @@ class HashMap {
     }
     return valueArray;
   }
-  entries() {}
+  get entries() {
+    let entryArray = [];
+    for (const bucket in this.buckets) {
+      entryArray.push([this.buckets[bucket].key, this.buckets[bucket].value]);
+    }
+    return entryArray;
+  }
 }
 const testMap = new HashMap();
 
@@ -70,4 +76,4 @@ console.log(testMap.length);
 console.table(testMap.buckets);
 console.log(testMap.get("Alex"));
 console.log(testMap.keys);
-console.log(testMap.values);
+console.log(testMap.entries[2]);
