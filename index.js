@@ -45,17 +45,29 @@ class HashMap {
     this.buckets = {};
     this.currentSize = 0;
   }
-  keys() {
+  get keys() {
+    let keyArray = [];
     for (const bucket in this.buckets) {
-      console.log(this.buckets[bucket]);
+      keyArray.push(this.buckets[bucket].key);
     }
+    return keyArray;
   }
-  values() {}
+  get values() {
+    let valueArray = [];
+    for (const bucket in this.buckets) {
+      valueArray.push(this.buckets[bucket].value);
+    }
+    return valueArray;
+  }
   entries() {}
 }
 const testMap = new HashMap();
 
-testMap.set("yippie", "yipp");
-testMap.set("yippieeee", "yipp");
-testMap.set("yippieeeeeeee", "yipp");
-console.log(testMap.get("yippie"));
+testMap.set("Alex", "yipp");
+testMap.set("Hector", "yipp");
+testMap.set("Anders", "yipp");
+console.log(testMap.length);
+console.table(testMap.buckets);
+console.log(testMap.get("Alex"));
+console.log(testMap.keys);
+console.log(testMap.values);
