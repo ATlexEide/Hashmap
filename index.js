@@ -1,5 +1,5 @@
 class HashMap {
-  constructor(size, loadFactor = 0.75) {
+  constructor(size = 16, loadFactor = 0.75) {
     this.size = size;
     this.loadFactor = loadFactor;
     this.currentSize = 0;
@@ -50,7 +50,7 @@ class HashMap {
   entries() {}
 }
 
-const testMap = new HashMap(16);
+const testMap = new HashMap();
 
 testMap.set("yippie", "yipp");
 console.log("get:");
