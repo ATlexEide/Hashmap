@@ -13,20 +13,17 @@ class HashMap {
       hashCode = primeNumber * hashCode + key.charCodeAt(i);
       hashCode = hashCode % this.size;
     }
-    console.log(hashCode);
     return hashCode;
   }
   set(key, value) {
     if (key === "") throw this.noKeyError;
-    const keyName = key;
-    key = this.hash(key);
-    console.log("in SET: " + key);
-    this.buckets[key] = { keyName: value };
+    const hash = this.hash(key);
+    this.buckets[hash] = { key, value };
     this.currentSize++;
   }
   get(key) {
     key = this.hash(key);
-    if (key in this.buckets) return Object.values(this.buckets[key]);
+    if (key in this.buckets) return this.buckets[key].value;
     else throw this.noKeyError;
   }
   has(key) {
@@ -44,15 +41,21 @@ class HashMap {
   get length() {
     return this.currentSize;
   }
-  clear() {}
-  keys() {}
+  clear() {
+    this.buckets = {};
+    this.currentSize = 0;
+  }
+  keys() {
+    for (const bucket in this.buckets) {
+      console.log(this.buckets[bucket]);
+    }
+  }
   values() {}
   entries() {}
 }
-
 const testMap = new HashMap();
 
 testMap.set("yippie", "yipp");
-console.log("get:");
+testMap.set("yippieeee", "yipp");
+testMap.set("yippieeeeeeee", "yipp");
 console.log(testMap.get("yippie"));
-console.log(testMap.buckets);
