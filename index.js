@@ -56,7 +56,6 @@ class HashMap {
   }
   get keys() {
     let keyArray = [];
-    // TODO: make compatible with linked list if head got a tail
     for (const bucket in this.buckets) {
       const currBucket = this.buckets[bucket];
       if (currBucket.head && !currBucket.next.next) {
@@ -75,8 +74,13 @@ class HashMap {
     let valueArray = [];
     for (const bucket in this.buckets) {
       const currBucket = this.buckets[bucket];
-      if (currBucket.head && currBucket.tail !== null) {
+      if (currBucket.head && !currBucket.next.next) {
         valueArray.push(currBucket.head.value);
+      } else {
+        while (currBucket.next !== null) {
+          valueArray.push(currBucket.next.value);
+          currBucket.next = currBucket.next.next;
+        }
       }
     }
     return valueArray;
@@ -86,8 +90,13 @@ class HashMap {
     let entryArray = [];
     for (const bucket in this.buckets) {
       const currBucket = this.buckets[bucket];
-      if (currBucket.head && currBucket.tail !== null) {
-        entryArray.push([currBucket.head.key, currBucket.head.value]);
+      if (currBucket.head && !currBucket.next.next) {
+        keyArray.push(currBucket.head.key);
+      } else {
+        while (currBucket.next !== null) {
+          keyArray.push(currBucket.next.key);
+          currBucket.next = currBucket.next.next;
+        }
       }
     }
     return entryArray;
@@ -102,4 +111,4 @@ testMap.set("Carlos", "yipp");
 
 console.table(testMap.buckets);
 console.log("control:");
-console.log(testMap.keys);
+console.log(testMap.values);
