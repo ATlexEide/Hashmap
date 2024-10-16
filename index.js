@@ -22,7 +22,7 @@ class HashMap {
       hashCode = hashCode % this.size;
     }
     // BUG RETURN HASHCODE WHEN DONE TESTING
-    return hashCode;
+    return 0;
   }
   set(key, value) {
     if (key === "") throw this.noKeyError;
@@ -69,7 +69,6 @@ class HashMap {
     }
     return keyArray;
   }
-  // TODO: make compatible with linked list if head got a tail
   get values() {
     let valueArray = [];
     for (const bucket in this.buckets) {
@@ -85,16 +84,15 @@ class HashMap {
     }
     return valueArray;
   }
-  // TODO: make compatible with linked list if head got a tail
   get entries() {
     let entryArray = [];
     for (const bucket in this.buckets) {
       const currBucket = this.buckets[bucket];
       if (currBucket.head && !currBucket.next.next) {
-        keyArray.push(currBucket.head.key);
+        entryArray.push([currBucket.head.key, currBucket.head.value]);
       } else {
         while (currBucket.next !== null) {
-          keyArray.push(currBucket.next.key);
+          entryArray.push([currBucket.next.key, currBucket.next.value]);
           currBucket.next = currBucket.next.next;
         }
       }
@@ -111,4 +109,4 @@ testMap.set("Carlos", "yipp");
 
 console.table(testMap.buckets);
 console.log("control:");
-console.log(testMap.values);
+console.log(testMap.entries);
