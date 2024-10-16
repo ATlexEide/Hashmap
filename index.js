@@ -5,8 +5,6 @@ class HashMap {
     this.size = size;
     this.loadFactor = loadFactor;
     this.currentSize = 0;
-    // TODO: Refactor bucket logic
-    // Spin up buckets with a loop over size specified on class creation
     this.buckets = {};
     this.init = () => {
       for (let i = 0; i < this.size; i++) {
@@ -27,8 +25,7 @@ class HashMap {
   }
   set(key, value) {
     if (key === "") throw this.noKeyError;
-    // TODO: Remember to set value back to normal
-    const hash = 15; //this.hash(key);
+    const hash = this.hash(key);
     this.buckets[hash].append(new Node(key, value));
     this.currentSize++;
   }
@@ -58,11 +55,20 @@ class HashMap {
   }
   get keys() {
     let keyArray = [];
+    // TODO: make compatible with linked list
     for (const bucket in this.buckets) {
-      keyArray.push(this.buckets[bucket].key);
+      const currBucket = this.buckets[bucket];
+      if (currBucket.head && currBucket.tail !== null) {
+        console.log("CurrBucket");
+        console.log(currBucket);
+        console.log("Data");
+        console.log(currBucket.head.data);
+        keyArray.push(currBucket.head);
+      }
     }
     return keyArray;
   }
+  // TODO: make compatible with linked list
   get values() {
     let valueArray = [];
     for (const bucket in this.buckets) {
@@ -71,6 +77,7 @@ class HashMap {
     }
     return valueArray;
   }
+  // TODO: make compatible with linked list
   get entries() {
     let entryArray = [];
     for (const bucket in this.buckets) {
