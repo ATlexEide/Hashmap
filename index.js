@@ -91,4 +91,4 @@ testMap.set("Carlos", "yipp");
 
 console.table(testMap.buckets);
 console.log("control:");
-console.log(testMap.keys);
+console.log(testMap.values);
