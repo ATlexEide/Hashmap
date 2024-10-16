@@ -55,7 +55,7 @@ class HashMap {
   }
   get keys() {
     let keyArray = [];
-    // TODO: make compatible with linked list
+    // TODO: make compatible with linked list if head got a tail
     for (const bucket in this.buckets) {
       const currBucket = this.buckets[bucket];
       if (currBucket.head && currBucket.tail !== null) {
@@ -64,20 +64,25 @@ class HashMap {
     }
     return keyArray;
   }
-  // TODO: make compatible with linked list
+  // TODO: make compatible with linked list if head got a tail
   get values() {
     let valueArray = [];
     for (const bucket in this.buckets) {
-      console.log(this.buckets[bucket].value);
-      if (bucket.value) valueArray.push(this.buckets[bucket].value);
+      const currBucket = this.buckets[bucket];
+      if (currBucket.head && currBucket.tail !== null) {
+        valueArray.push(currBucket.head.value);
+      }
     }
     return valueArray;
   }
-  // TODO: make compatible with linked list
+  // TODO: make compatible with linked list if head got a tail
   get entries() {
     let entryArray = [];
     for (const bucket in this.buckets) {
-      entryArray.push([this.buckets[bucket].key, this.buckets[bucket].value]);
+      const currBucket = this.buckets[bucket];
+      if (currBucket.head && currBucket.tail !== null) {
+        entryArray.push([currBucket.head.key, currBucket.head.value]);
+      }
     }
     return entryArray;
   }
@@ -91,4 +96,4 @@ testMap.set("Carlos", "yipp");
 
 console.table(testMap.buckets);
 console.log("control:");
-console.log(testMap.values);
+console.log(testMap.entries);
