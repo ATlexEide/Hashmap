@@ -21,6 +21,7 @@ class HashMap {
       hashCode = primeNumber * hashCode + key.charCodeAt(i);
       hashCode = hashCode % this.size;
     }
+    // BUG RETURN HASHCODE WHEN DONE TESTING
     return hashCode;
   }
   set(key, value) {
@@ -58,8 +59,13 @@ class HashMap {
     // TODO: make compatible with linked list if head got a tail
     for (const bucket in this.buckets) {
       const currBucket = this.buckets[bucket];
-      if (currBucket.head && currBucket.tail !== null) {
+      if (currBucket.head && !currBucket.next.next) {
         keyArray.push(currBucket.head.key);
+      } else {
+        while (currBucket.next !== null) {
+          keyArray.push(currBucket.next.key);
+          currBucket.next = currBucket.next.next;
+        }
       }
     }
     return keyArray;
@@ -96,4 +102,4 @@ testMap.set("Carlos", "yipp");
 
 console.table(testMap.buckets);
 console.log("control:");
-console.log(testMap.entries);
+console.log(testMap.keys);
