@@ -54,16 +54,16 @@ export class LinkedList {
   }
   contains(value) {
     let tmp = this.next;
-    while (tmp !== null && tmp.name !== value && tmp.data !== value) {
+    while (tmp !== null && tmp.key !== value && tmp.data !== value) {
       tmp = tmp.next;
     }
     if (!tmp) return false;
-    if (tmp.name === value || tmp.data === value) return true;
+    if (tmp.key === value || tmp.data === value) return true;
   }
   find(value) {
     if (this.contains(value)) {
       let tmp = this.next;
-      while (tmp !== null && tmp.name !== value && tmp.data !== value) {
+      while (tmp !== null && tmp.key !== value && tmp.data !== value) {
         tmp = tmp.next;
       }
       return tmp;
@@ -73,7 +73,7 @@ export class LinkedList {
     let string = "";
     let tmp = this.next;
     while (tmp !== null) {
-      string += `( ${tmp.name} ) -> `;
+      string += `( ${tmp.key} ) -> `;
       tmp = tmp.next;
     }
     string += "(null)";
@@ -82,8 +82,8 @@ export class LinkedList {
 }
 
 export class Node {
-  constructor(name, data = "no data") {
-    this.name = name;
+  constructor(key, data = "no data") {
+    this.key = key;
     this.data = data;
     this.next = null;
   }

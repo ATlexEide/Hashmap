@@ -59,11 +59,7 @@ class HashMap {
     for (const bucket in this.buckets) {
       const currBucket = this.buckets[bucket];
       if (currBucket.head && currBucket.tail !== null) {
-        console.log("CurrBucket");
-        console.log(currBucket);
-        console.log("Data");
-        console.log(currBucket.head.data);
-        keyArray.push(currBucket.head);
+        keyArray.push(currBucket.head.key);
       }
     }
     return keyArray;
@@ -92,8 +88,7 @@ testMap.set("Alex", "yippeeeee");
 testMap.set("Hector", "yipp");
 testMap.set("Carla", "yipp");
 testMap.set("Carlos", "yipp");
-console.table(testMap.buckets);
-console.log(testMap.values);
 
-console.log("control:");
 console.table(testMap.buckets);
+console.log("control:");
+console.log(testMap.keys);
