@@ -1,3 +1,5 @@
+import { LinkedList } from "./linkedList.js";
+import { Node } from "./linkedList.js";
 class HashMap {
   constructor(size = 16, loadFactor = 0.75) {
     this.size = size;
@@ -27,17 +29,8 @@ class HashMap {
     if (key === "") throw this.noKeyError;
     // TODO: Remember to set value back to normal
     const hash = 15; //this.hash(key);
-    console.log("test");
-    // console.log(Object.keys(this.buckets[15]));
-    console.log(testMap.buckets[15].key);
-
-    if (!this.buckets[hash].value) {
-      this.buckets[hash] = { key, value };
-      this.currentSize++;
-    } else {
-      const cachedValue = this.buckets[hash];
-      this.buckets[hash].value = {cachedValue.key:{}}};
-    }
+    this.buckets[hash].append(new Node(key, value));
+    this.currentSize++;
   }
   get(key) {
     key = this.hash(key);
@@ -96,4 +89,4 @@ console.table(testMap.buckets);
 console.log(testMap.values);
 
 console.log("control:");
-console.log(testMap.buckets[15].key);
+console.table(testMap.buckets);
