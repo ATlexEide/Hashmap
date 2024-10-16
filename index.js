@@ -3,7 +3,15 @@ class HashMap {
     this.size = size;
     this.loadFactor = loadFactor;
     this.currentSize = 0;
+    // TODO: Refactor bucket logic
+    // Spin up buckets with a loop over size specified on class creation
     this.buckets = {};
+    this.init = () => {
+      for (let i = 0; i < this.size; i++) {
+        this.buckets[i] = new LinkedList();
+      }
+    };
+    this.init();
     this.noKeyError = "Error: No Key (Key does not exist)";
   }
   hash(key) {
@@ -17,9 +25,19 @@ class HashMap {
   }
   set(key, value) {
     if (key === "") throw this.noKeyError;
-    const hash = this.hash(key);
-    this.buckets[hash] = { key, value };
-    this.currentSize++;
+    // TODO: Remember to set value back to normal
+    const hash = 15; //this.hash(key);
+    console.log("test");
+    // console.log(Object.keys(this.buckets[15]));
+    console.log(testMap.buckets[15].key);
+
+    if (!this.buckets[hash].value) {
+      this.buckets[hash] = { key, value };
+      this.currentSize++;
+    } else {
+      const cachedValue = this.buckets[hash];
+      this.buckets[hash].value = {cachedValue.key:{}}};
+    }
   }
   get(key) {
     key = this.hash(key);
@@ -55,7 +73,8 @@ class HashMap {
   get values() {
     let valueArray = [];
     for (const bucket in this.buckets) {
-      valueArray.push(this.buckets[bucket].value);
+      console.log(this.buckets[bucket].value);
+      if (bucket.value) valueArray.push(this.buckets[bucket].value);
     }
     return valueArray;
   }
@@ -69,11 +88,12 @@ class HashMap {
 }
 const testMap = new HashMap();
 
-testMap.set("Alex", "yipp");
+testMap.set("Alex", "yippeeeee");
 testMap.set("Hector", "yipp");
-testMap.set("Anders", "yipp");
-console.log(testMap.length);
+testMap.set("Carla", "yipp");
+testMap.set("Carlos", "yipp");
 console.table(testMap.buckets);
-console.log(testMap.get("Alex"));
-console.log(testMap.keys);
-console.log(testMap.entries[2]);
+console.log(testMap.values);
+
+console.log("control:");
+console.log(testMap.buckets[15].key);
