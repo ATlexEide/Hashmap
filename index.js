@@ -21,8 +21,7 @@ class HashMap {
       hashCode = primeNumber * hashCode + key.charCodeAt(i);
       hashCode = hashCode % this.size;
     }
-    // BUG RETURN HASHCODE WHEN DONE TESTING
-    return 0;
+    return hashCode;
   }
   set(key, value) {
     if (key === "") throw this.noKeyError;
