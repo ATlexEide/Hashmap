@@ -19,7 +19,7 @@ class HashMap {
     this.maxLoad = this.size * this.loadFactor;
   }
   scale() {
-    this.size += this.maxLoad;
+    this.size += Math.round(this.maxLoad / 1.5);
     this.updateMaxLoad();
     const cache = [];
     this.buckets.forEach((bucket) => {
