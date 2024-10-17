@@ -4,8 +4,12 @@ class HashMap {
   constructor(size = 16, loadFactor = 0.75) {
     this.size = size;
     this.loadFactor = loadFactor;
-    this.currentSize = 0;
+    this.maxLoad = this.size * this.loadFactor;
     this.buckets = {};
+    this.currentSize = 0;
+    if (this.currentSize >= this.maxLoad) {
+      // TODO: ADD LOGIC
+    }
     this.init = () => {
       for (let i = 0; i < this.size; i++) {
         this.buckets[i] = new LinkedList();
@@ -119,3 +123,4 @@ testMap.set("Carlos", "yipp");
 testMap.set("Alex", "abc");
 console.table(testMap.buckets);
 console.table(testMap.keys);
+console.log(testMap.maxLoad);
