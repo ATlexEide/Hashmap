@@ -5,7 +5,7 @@ class HashMap {
     this.size = size;
     this.loadFactor = loadFactor;
     this.maxLoad = this.size * this.loadFactor;
-    this.buckets = {};
+    this.buckets = [];
     this.currentSize = 0;
     this.init = () => {
       for (let i = 0; i < this.size; i++) {
@@ -15,32 +15,33 @@ class HashMap {
     this.init();
     this.noKeyError = "Error: No Key (Key does not exist)";
   }
-  scale(){
-     const cache = this.buckets;
-     this.buckets = {};
-    // TODO: ADD LOGIC
+  updateMaxLoad() {
+    this.maxLoad = this.size * this.loadFactor;
+  }
+  scale() {
     this.size += this.maxLoad;
-    console.log(this.size);
+    this.updateMaxLoad();
+    const cache = [];
+    this.buckets.forEach((bucket) => {
+      if (bucket.next !== null) cache.push(bucket);
+    });
+    this.currentSize = 0;
+    this.buckets = [];
     this.init();
+
+    // TODO: ADD LOGIC
+    console.log(this.size);
     this.repopulate(cache);
   }
-  repopulate(cachedBuckets){
-    for(const bucket in cachedBuckets){
-      const node = cachedBuckets[bucket];
-      
-      if (!node.head) {
-        
-      } else if(node.next){
-        while(!node.next)
-        {
-          const key = node.next.key;
-          const value = node.next.value;
-          node.next = node.next.next
-  this.set(key,value)
-        }
-        
+  repopulate(cachedBuckets) {
+    console.table(cachedBuckets);
+    cachedBuckets.forEach((bucket) => {
+      let tmp = bucket.next;
+      while (tmp !== null) {
+        this.set(tmp.key, tmp.value);
+        tmp = tmp.next;
       }
-    }
+    });
   }
   hash(key) {
     let hashCode = 0;
@@ -132,7 +133,7 @@ class HashMap {
         while (currBucket.next !== null) {
           entryArray.push([currBucket.next.key, currBucket.next.value]);
           currBucket.next = currBucket.next.next;
-        } 
+        }
       }
     }
     return entryArray;
@@ -146,22 +147,23 @@ testMap.set("Carla", "yipp");
 testMap.set("Carlos", "yipp");
 testMap.set("Alex", "abc");
 
-
-
-
 /////////////////////////////////////////
- testMap.set("apple", "red");
- testMap.set("banana", "yellow");
- testMap.set("carrot", "orange");
- testMap.set("dog", "brown");
- testMap.set("elephant", "gray");
- testMap.set("frog", "green");
- testMap.set("grape", "purple");
- testMap.set("hat", "black");
-//  testMap.set("icecream", "white");
-//  testMap.set("jacket", "blue");
-//  testMap.set("kite", "pink");
-//  testMap.set("lion", "golden");
+testMap.set("apple", "red");
+testMap.set("banana", "yellow");
+testMap.set("carrot", "orange");
+testMap.set("dog", "brown");
+testMap.set("elephant", "gray");
+testMap.set("frog", "green");
+testMap.set("grape", "purple");
+testMap.set("hat", "black");
+testMap.set("icecream", "white");
+testMap.set("jacket", "blue");
+testMap.set("kite", "pink");
+testMap.set("lion", "golden");
+// setTimeout(() => {
+//   console.table(testMap.entries);
+//   console.table(testMap.currentSize);
+
+// }, 1000);
 console.table(testMap.buckets);
-console.table(testMap.entries);
-console.table(testMap.currentSize);
+console.log(testMap.length);
