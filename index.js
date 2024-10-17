@@ -107,13 +107,12 @@ class HashMap {
         while (currBucket.next !== null) {
           entryArray.push([currBucket.next.key, currBucket.next.value]);
           currBucket.next = currBucket.next.next;
-        }
+        } 
       }
     }
     return entryArray;
   }
 }
-// TODO: test all methods with and without collisions
 const testMap = new HashMap();
 
 testMap.set("Alex", "abc");
@@ -122,5 +121,4 @@ testMap.set("Carla", "yipp");
 testMap.set("Carlos", "yipp");
 testMap.set("Alex", "abc");
 console.table(testMap.buckets);
-console.table(testMap.keys);
-console.log(testMap.maxLoad);
+console.table(testMap.entries);
