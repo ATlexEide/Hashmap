@@ -7,9 +7,6 @@ class HashMap {
     this.maxLoad = this.size * this.loadFactor;
     this.buckets = {};
     this.currentSize = 0;
-    if (this.currentSize >= this.maxLoad) {
-      // TODO: ADD LOGIC
-    }
     this.init = () => {
       for (let i = 0; i < this.size; i++) {
         this.buckets[i] = new LinkedList();
@@ -17,6 +14,33 @@ class HashMap {
     };
     this.init();
     this.noKeyError = "Error: No Key (Key does not exist)";
+  }
+  scale(){
+     const cache = this.buckets;
+     this.buckets = {};
+    // TODO: ADD LOGIC
+    this.size += this.maxLoad;
+    console.log(this.size);
+    this.init();
+    this.repopulate(cache);
+  }
+  repopulate(cachedBuckets){
+    for(const bucket in cachedBuckets){
+      const node = cachedBuckets[bucket];
+      
+      if (!node.head) {
+        
+      } else if(node.next){
+        while(!node.next)
+        {
+          const key = node.next.key;
+          const value = node.next.value;
+          node.next = node.next.next
+  this.set(key,value)
+        }
+        
+      }
+    }
   }
   hash(key) {
     let hashCode = 0;
@@ -42,6 +66,7 @@ class HashMap {
       this.buckets[hash].append(new Node(key, value));
       this.currentSize++;
     }
+    if (this.currentSize >= this.maxLoad) this.scale();
   }
   get(key) {
     key = this.hash(key);
@@ -120,5 +145,23 @@ testMap.set("Hector", "yipp");
 testMap.set("Carla", "yipp");
 testMap.set("Carlos", "yipp");
 testMap.set("Alex", "abc");
+
+
+
+
+/////////////////////////////////////////
+ testMap.set("apple", "red");
+ testMap.set("banana", "yellow");
+ testMap.set("carrot", "orange");
+ testMap.set("dog", "brown");
+ testMap.set("elephant", "gray");
+ testMap.set("frog", "green");
+ testMap.set("grape", "purple");
+ testMap.set("hat", "black");
+//  testMap.set("icecream", "white");
+//  testMap.set("jacket", "blue");
+//  testMap.set("kite", "pink");
+//  testMap.set("lion", "golden");
 console.table(testMap.buckets);
 console.table(testMap.entries);
+console.table(testMap.currentSize);

@@ -5,7 +5,7 @@ export class LinkedList {
   next = null;
   constructor() {}
   append(node) {
-    if (typeof node === "string") node = new Node(node);
+    if (typeof node.key !== "string") return
     if (this.head === null) {
       this.head = node;
       this.tail = node;
@@ -22,7 +22,7 @@ export class LinkedList {
     this.length++;
   }
   prepend(node) {
-    if (typeof node === "string") node = new Node(node);
+    if (typeof node !== "string") return;
     node.next = this.next;
     this.head = node;
     this.next = node;
@@ -54,19 +54,19 @@ export class LinkedList {
   }
   hasValue(value) {
     let tmp = this.next;
-    while (tmp !== null && tmp.key !== value && tmp.value !== value) {
+    while (tmp !== null && tmp.key !== value) {
       tmp = tmp.next;
     }
     if (!tmp) return false;
-    if (tmp.key === value || tmp.value === value) return true;
+    if (tmp.key === value) return true;
   }
   hasKey(key) {
     let tmp = this.next;
-    while (tmp !== null && tmp.key !== key && tmp.key !== key) {
+    while (tmp !== null && tmp.key !== key) {
       tmp = tmp.next;
     }
     if (!tmp) return false;
-    if (tmp.key === key || tmp.key === key) return true;
+    if (tmp.key === key) return true;
   }
   find(value) {
     if (this.hasValue(value) || this.hasKey(value)) {
