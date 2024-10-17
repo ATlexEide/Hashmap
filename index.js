@@ -156,7 +156,7 @@ testMap.set("elephant", "gray");
 testMap.set("frog", "green");
 testMap.set("grape", "purple");
 testMap.set("hat", "black");
-testMap.set("icecream", "white");
+testMap.set("ice cream", "white");
 testMap.set("jacket", "blue");
 testMap.set("kite", "pink");
 testMap.set("lion", "golden");
@@ -167,3 +167,5 @@ testMap.set("lion", "golden");
 // }, 1000);
 console.table(testMap.buckets);
 console.log(testMap.length);
+console.log(testMap.length);
+//TODO: TEST ALL FUNCTIONS WITH EXPANDED HASHMAP
