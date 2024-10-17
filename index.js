@@ -26,8 +26,18 @@ class HashMap {
   set(key, value) {
     if (key === "") throw this.noKeyError;
     const hash = this.hash(key);
-    this.buckets[hash].append(new Node(key, value));
-    this.currentSize++;
+    if (!this.buckets[hash].hasKey(key)) {
+      this.buckets[hash].append(new Node(key, value));
+      this.currentSize++;
+    } else if (
+      this.buckets[hash].find(key).key === key &&
+      this.buckets[hash].find(key).value === value
+    ) {
+      this.buckets[hash].find(key).value = value;
+    } else {
+      this.buckets[hash].append(new Node(key, value));
+      this.currentSize++;
+    }
   }
   get(key) {
     key = this.hash(key);
@@ -57,7 +67,7 @@ class HashMap {
     let keyArray = [];
     for (const bucket in this.buckets) {
       const currBucket = this.buckets[bucket];
-      if (currBucket.head && !currBucket.next.next) {
+      if (currBucket.head && !currBucket.next) {
         keyArray.push(currBucket.head.key);
       } else {
         while (currBucket.next !== null) {
@@ -72,7 +82,7 @@ class HashMap {
     let valueArray = [];
     for (const bucket in this.buckets) {
       const currBucket = this.buckets[bucket];
-      if (currBucket.head && !currBucket.next.next) {
+      if (currBucket.head && !currBucket.next) {
         valueArray.push(currBucket.head.value);
       } else {
         while (currBucket.next !== null) {
@@ -99,13 +109,13 @@ class HashMap {
     return entryArray;
   }
 }
+// TODO: test all methods with and without collisions
 const testMap = new HashMap();
 
-testMap.set("Alex", "yippeeeee");
+testMap.set("Alex", "abc");
 testMap.set("Hector", "yipp");
 testMap.set("Carla", "yipp");
 testMap.set("Carlos", "yipp");
-
+testMap.set("Alex", "abc");
 console.table(testMap.buckets);
-console.log("control:");
-console.log(testMap.entries);
+console.table(testMap.keys);

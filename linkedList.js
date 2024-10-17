@@ -52,7 +52,7 @@ export class LinkedList {
     this.tail = secondToLast;
     this.length--;
   }
-  contains(value) {
+  hasValue(value) {
     let tmp = this.next;
     while (tmp !== null && tmp.key !== value && tmp.value !== value) {
       tmp = tmp.next;
@@ -60,8 +60,16 @@ export class LinkedList {
     if (!tmp) return false;
     if (tmp.key === value || tmp.value === value) return true;
   }
+  hasKey(key) {
+    let tmp = this.next;
+    while (tmp !== null && tmp.key !== key && tmp.key !== key) {
+      tmp = tmp.next;
+    }
+    if (!tmp) return false;
+    if (tmp.key === key || tmp.key === key) return true;
+  }
   find(value) {
-    if (this.contains(value)) {
+    if (this.hasValue(value) || this.hasKey(value)) {
       let tmp = this.next;
       while (tmp !== null && tmp.key !== value && tmp.value !== value) {
         tmp = tmp.next;
