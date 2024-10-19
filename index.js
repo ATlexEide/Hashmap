@@ -71,8 +71,22 @@ class HashMap {
   }
   get(key) {
     key = this.hash(key);
-    if (key in this.buckets) return this.buckets[key].value;
-    else throw this.noKeyError;
+    if (false) {
+      for (const curr of this.buk) {
+      }
+    }
+    this.buckets[key].head;
+    if (this.buckets[key].head && !this.buckets[key].head.next)
+      return this.buckets[key].value;
+    else if (this.buckets[key].head.next) {
+      let tmpArray = [];
+      let tmp = this.buckets[key].head;
+      while (tmp) {
+        tmpArray.push(tmp);
+        tmp = tmp.next;
+      }
+      return tmpArray;
+    } else throw this.noKeyError;
   }
   has(key) {
     key = this.hash(key);
@@ -145,7 +159,7 @@ testMap.set("Alex", "abc");
 testMap.set("Hector", "yipp");
 testMap.set("Carla", "yipp");
 testMap.set("Carlos", "yipp");
-testMap.set("Alex", "abc");
+testMap.set("Alex", "abhc");
 
 /////////////////////////////////////////
 testMap.set("apple", "red");
@@ -169,3 +183,4 @@ console.table(testMap.buckets);
 console.log(testMap.length);
 console.log(testMap.length);
 //TODO: TEST ALL FUNCTIONS WITH EXPANDED HASHMAP
+console.log(testMap.get("Alex"));
